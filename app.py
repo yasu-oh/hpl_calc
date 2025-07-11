@@ -15,7 +15,7 @@ GPU_MEM_MAP = {
 # Ns 計算関数
 # ----------------------------
 def estimate_ns(total_mem_bytes, usage_ratio, nb):
-    usable_mem = total_mem_bytes * usage_ratio
+    usable_mem = total_mem_bytes * usage_ratio / 1.2 # 20%の作業領域を確保
     raw_N = math.sqrt(usable_mem / 8)  # 1要素 = 8バイト（double）
     adjusted_N = int(raw_N // nb * nb)  # NB の倍数に切り下げ
     return adjusted_N
