@@ -15,7 +15,7 @@ GPU_MEM_MAP = {
 # Ns 計算関数
 # ----------------------------
 def estimate_ns(total_mem_bytes, usage_ratio, nb):
-    usable_mem = total_mem_bytes * usage_ratio / 1.2 # 20%の作業領域を確保
+    usable_mem = total_mem_bytes * usage_ratio / 1.1 # 10%の作業領域を確保
     raw_N = math.sqrt(usable_mem / 8)  # 1要素 = 8バイト（double）
     adjusted_N = int(raw_N // nb * nb)  # NB の倍数に切り下げ
     return adjusted_N
@@ -67,7 +67,7 @@ with gr.Blocks() as iface:
     # パラメータ入力欄
     num_gpus = gr.Number(label="GPU数", value=504, precision=0)
     mem_per_gpu = gr.Number(label="1枚あたりのGPUメモリ容量（MiB）", value=183359, precision=0)
-    mem_util = gr.Slider(label="メモリ使用率", minimum=0.0, maximum=1.0, step=0.01, value=0.95)
+    mem_util = gr.Slider(label="メモリ使用率", minimum=0.0, maximum=1.0, step=0.01, value=0.99)
     nb_input = gr.Number(label="ブロックサイズ（NBs）", value=2048, precision=0)
     # 計算実行ボタン
     run_btn = gr.Button("計算実行")
